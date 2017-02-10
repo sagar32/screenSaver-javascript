@@ -6,10 +6,16 @@ var screenSaver = (function () {
             console.log(config);
             if (config != {}) {
                 if (config['noOfObj'] == "multiple") {
-
-                    var noOfImges = Math.floor((Math.random() * 50) + 5);
-                    for (var i = 0; i <= noOfImges; i++) {
-                        this.multipleImg();
+                    if (config['objType'] == "text") {
+                        var text = window.prompt("Enter Your Name") ||'Sagar Chopada';
+                        for (var i = 0; i < text.length; i++) {
+                            this.multipleImg(text[i]);
+                        }
+                    } else {
+                        var noOfImges = Math.floor((Math.random() * 50) + 5);
+                        for (var i = 0; i <= noOfImges; i++) {
+                            this.multipleImg();
+                        }
                     }
 
                 } else {
@@ -18,7 +24,7 @@ var screenSaver = (function () {
             }
         },
         singleImg() {
-             var img = document.createElement('img');
+            var img = document.createElement('img');
             img.src = './img.png';
             document.body.appendChild(img);
 
@@ -101,32 +107,53 @@ var screenSaver = (function () {
 
 
         multipleImg() {
-            var img = document.createElement('img');
-            img.src = './img.png';
-            document.body.appendChild(img);
+            //console.log(arguments[0]);
+            if (arguments.length > 0) {
+                var img = document.createElement('font');
+                var text = document.createTextNode(arguments[0]);
+                img.appendChild(text);
+                document.body.appendChild(img);
 
-            var imgHeight = Math.floor((Math.random() * 110) + 15);
-           // var imgWidth = Math.floor((Math.random() * 200) + 25);
+                var fontSize = Math.floor((Math.random() * 110) + 30);
 
-            img.style.height = imgHeight + 'px';
-            img.style.width = imgHeight + 'px';
+                img.style.fontSize=fontSize+"px";
+                var color=['red','green','blue','yellow','pink','brown'];
 
-            img.style.opacity=Math.random()+0.1;
+                img.style.color=color[Math.floor(Math.random()*color.length)];
+
+                img.style.opacity = Math.random() + 0.4;
+
+            } else {
+                var img = document.createElement('img');
+                img.src = './img.png';
+                document.body.appendChild(img);
+
+                var imgHeight = Math.floor((Math.random() * 110) + 15);
+                // var imgWidth = Math.floor((Math.random() * 200) + 25);
+
+                img.style.height = imgHeight + 'px';
+                img.style.width = imgHeight + 'px';
+
+                img.style.opacity = Math.random() + 0.1;
+            }
+
+
+
 
             var imgPos = img.getBoundingClientRect();
             //console.log(imgPos);
             document.body.style.height = "100%";
             var bodyPos = document.body.getBoundingClientRect();
-           // console.log(bodyPos);
+            // console.log(bodyPos);
 
             var bottonPos = bodyPos.bottom - imgPos.height;
             var rightPos = bodyPos.width - imgPos.width;
 
 
-            var topPlus = Math.floor((Math.random() * bodyPos.bottom) + 1) -imgPos.height;
-            var leftPlus = Math.floor((Math.random() * bodyPos.width) + 1)-imgPos.width;
+            var topPlus = Math.floor((Math.random() * bodyPos.bottom) + 1) - imgPos.height;
+            var leftPlus = Math.floor((Math.random() * bodyPos.width) + 1) - imgPos.width;
 
-            var timeIntervalSpeed = Math.floor((Math.random()*config['speed'])+2);
+            var timeIntervalSpeed = Math.floor((Math.random() * config['speed']) + 2);
 
             img.style.position = 'absolute';
             var timerArray = [];
@@ -192,8 +219,7 @@ var screenSaver = (function () {
             var funArray = [t1, t2, t3, t4];
             var index = Math.floor(Math.random() * funArray.length);
             var currFun = funArray[index];
-            //var currFun=funArray[1];
-            //console.log(currFun);
+
             timerArray[index] = setInterval(currFun, timeIntervalSpeed);
         }//function multiple img
 
