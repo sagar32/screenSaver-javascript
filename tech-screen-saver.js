@@ -7,7 +7,8 @@ var screenSaver = (function () {
             if (config != {}) {
                 if (config['noOfObj'] == "multiple") {
                     if (config['objType'] == "text") {
-                        var text = window.prompt("Enter Your Name") ||'Sagar Chopada';
+                        var enterByUser=window.prompt("Enter Your Name").trim();
+                        var text = enterByUser ||'Sagar Chopada';
                         for (var i = 0; i < text.length; i++) {
                             this.multipleImg(text[i]);
                         }
