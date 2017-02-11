@@ -1,6 +1,6 @@
 var screenSaver = (function () {
     var config = {};
-    var color;
+    var color=['#1abc9c','#2ecc71','#3498db','#9b59b6','#34495e','#16a085','#f1c40f','#f39c12','#d35400','#27ae60','#2980b9','#e74c3c','#8e44ad','#2c3e50'];
     return {
         init(obj) {
             config = obj || {};
@@ -12,6 +12,11 @@ var screenSaver = (function () {
                         var text = enterByUser ||'Sagar Chopada';
                         for (var i = 0; i < text.length; i++) {
                             this.multipleImg(text[i]);
+                        }
+                    }else if(config['objType'] == "randomChar"){
+                        var rndomChar='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                        for (var i = 0; i < 50; i++) {
+                            this.multipleImg(rndomChar[i]);
                         }
                     } else {
                         var noOfImges = Math.floor((Math.random() * 50) + 5);
@@ -25,7 +30,6 @@ var screenSaver = (function () {
                 }
             }
         },
-
         multipleImg() {
             //console.log(arguments[0]);
             if (arguments.length > 0) {
@@ -37,8 +41,7 @@ var screenSaver = (function () {
                 var fontSize = Math.floor((Math.random() * 110) + 30);
 
                 img.style.fontSize=fontSize+"px";
-                color=['#1abc9c','#2ecc71','#3498db','#9b59b6','#34495e','#16a085','#f1c40f','#f39c12','#d35400','#27ae60','#2980b9','#e74c3c','#8e44ad','#2c3e50'];
-
+                
                 img.style.color=color[Math.floor(Math.random()*color.length)];
 
                 img.style.opacity = Math.random() + 0.4;
@@ -146,7 +149,6 @@ var screenSaver = (function () {
             var funArray = [t1, t2, t3, t4];
             var index = Math.floor(Math.random() * funArray.length);
             var currFun = funArray[index];
-
             timerArray[index] = setInterval(currFun, timeIntervalSpeed);
         },//function multiple img
      singleImg() {
