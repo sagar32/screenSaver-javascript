@@ -1,6 +1,6 @@
 var screenSaver = (function () {
     var config = {};
-    var color=['#1abc9c','#2ecc71','#3498db','#9b59b6','#34495e','#16a085','#f1c40f','#f39c12','#d35400','#27ae60','#2980b9','#e74c3c','#8e44ad','#2c3e50'];
+    var color = ['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#f1c40f', '#f39c12', '#d35400', '#27ae60', '#2980b9', '#e74c3c', '#8e44ad', '#2c3e50'];
     return {
         init(obj) {
             config = obj || {};
@@ -8,14 +8,14 @@ var screenSaver = (function () {
             if (config != {}) {
                 if (config['noOfObj'] == "multiple") {
                     if (config['objType'] == "text") {
-                        var enterByUser=window.prompt("Enter Your Name").trim();
-                        var text = enterByUser ||'Sagar Chopada';
+                        var enterByUser = window.prompt("Enter Your Name").trim();
+                        var text = enterByUser || 'Sagar Chopada';
                         for (var i = 0; i < text.length; i++) {
                             this.multipleImg(text[i]);
                         }
-                    }else if(config['objType'] == "randomChar"){
-                        var rndomChar='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-                        for (var i = 0; i < 50; i++) {
+                    } else if (config['objType'] == "randomChar") {
+                        var rndomChar = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                        for (var i = 0; i < 40; i++) {
                             this.multipleImg(rndomChar[i]);
                         }
                     } else {
@@ -40,9 +40,9 @@ var screenSaver = (function () {
 
                 var fontSize = Math.floor((Math.random() * 110) + 30);
 
-                img.style.fontSize=fontSize+"px";
-                
-                img.style.color=color[Math.floor(Math.random()*color.length)];
+                img.style.fontSize = fontSize + "px";
+
+                img.style.color = color[Math.floor(Math.random() * color.length)];
 
                 img.style.opacity = Math.random() + 0.4;
 
@@ -60,7 +60,6 @@ var screenSaver = (function () {
                 img.style.opacity = Math.random() + 0.1;
             }
 
-
             var imgPos = img.getBoundingClientRect();
             // console.log(imgPos);
             document.body.style.height = "100%";
@@ -70,15 +69,14 @@ var screenSaver = (function () {
             var bottonPos = bodyPos.bottom - imgPos.height;
             var rightPos = bodyPos.width - imgPos.width;
 
-
             var topPlus = Math.floor((Math.random() * bodyPos.bottom) + 1) - imgPos.height;
             var leftPlus = Math.floor((Math.random() * bodyPos.width) + 1) - imgPos.width;
-
-            var timeIntervalSpeed = Math.floor((Math.random() * config['speed']) + 2);
 
             img.style.position = 'absolute';
             var timerArray = [];
             var t1, t2, t3, t4;
+
+            var timeIntervalSpeed = Math.floor((Math.random() * config['speed']) + 2);
 
             t1 = function () {
                 topPlus++;
@@ -87,17 +85,18 @@ var screenSaver = (function () {
                 img.style.left = leftPlus;
                 if (parseInt(img.style.top) >= bottonPos) { //if bottom of body
                     clearInterval(timerArray[0]);
-                    img.style.color=color[Math.floor(Math.random()*color.length)];
+                    if (img.style.color)
+                        img.style.color = color[Math.floor(Math.random() * color.length)];
                     timerArray[1] = setInterval(t2, timeIntervalSpeed);
 
                 }
                 else if (parseInt(img.style.left) >= rightPos) { //if rightside of body 
                     clearInterval(timerArray[0]);
-                    img.style.color=color[Math.floor(Math.random()*color.length)];
+                    if (img.style.color)
+                        img.style.color = color[Math.floor(Math.random() * color.length)];
                     timerArray[3] = setInterval(t4, timeIntervalSpeed);
                 }
             }
-
             t2 = function () {
                 topPlus--;
                 leftPlus++;
@@ -105,12 +104,14 @@ var screenSaver = (function () {
                 img.style.left = leftPlus;
                 if (parseInt(img.style.left) >= rightPos) { //if rightside of body
                     clearInterval(timerArray[1]);
-                    img.style.color=color[Math.floor(Math.random()*color.length)];
+                    if (img.style.color)
+                        img.style.color = color[Math.floor(Math.random() * color.length)];
                     timerArray[2] = setInterval(t3, timeIntervalSpeed);
                 }
                 else if (parseInt(img.style.top) <= 0) { // if top of body
                     clearInterval(timerArray[1]);
-                    img.style.color=color[Math.floor(Math.random()*color.length)];
+                    if (img.style.color)
+                        img.style.color = color[Math.floor(Math.random() * color.length)];
                     timerArray[0] = setInterval(t1, timeIntervalSpeed);
                 }
             }
@@ -121,12 +122,14 @@ var screenSaver = (function () {
                 img.style.left = leftPlus;
                 if (parseInt(img.style.top) <= 0) { // if top of body
                     clearInterval(timerArray[2]);
-                    img.style.color=color[Math.floor(Math.random()*color.length)];
+                    if (img.style.color)
+                        img.style.color = color[Math.floor(Math.random() * color.length)];
                     timerArray[3] = setInterval(t4, timeIntervalSpeed);
                 }
                 else if (parseInt(img.style.left) <= 0) { // if leftside of body
                     clearInterval(timerArray[2]);
-                    img.style.color=color[Math.floor(Math.random()*color.length)];
+                    if (img.style.color)
+                        img.style.color = color[Math.floor(Math.random() * color.length)];
                     timerArray[1] = setInterval(t2, timeIntervalSpeed);
                 }
             }
@@ -137,12 +140,14 @@ var screenSaver = (function () {
                 img.style.left = leftPlus;
                 if (parseInt(img.style.left) <= 0) { //if leftside of body
                     clearInterval(timerArray[3]);
-                    img.style.color=color[Math.floor(Math.random()*color.length)];
+                    if (img.style.color)
+                        img.style.color = color[Math.floor(Math.random() * color.length)];
                     timerArray[0] = setInterval(t1, timeIntervalSpeed);
                 }
                 else if (parseInt(img.style.top) >= bottonPos) { // if bottom of body
                     clearInterval(timerArray[3]);
-                    img.style.color=color[Math.floor(Math.random()*color.length)];
+                    if (img.style.color)
+                        img.style.color = color[Math.floor(Math.random() * color.length)];
                     timerArray[2] = setInterval(t3, timeIntervalSpeed);
                 }
             }
@@ -151,7 +156,7 @@ var screenSaver = (function () {
             var currFun = funArray[index];
             timerArray[index] = setInterval(currFun, timeIntervalSpeed);
         },//function multiple img
-     singleImg() {
+        singleImg() {
             var img = document.createElement('img');
             img.src = './img.png';
             document.body.appendChild(img);
